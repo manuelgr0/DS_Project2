@@ -10,8 +10,32 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ch.ethz.inf.vs.a2.anicolus.webservices.MainActivity">
 
-    <TextView
+    <Button
+        android:text="Task 1"
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:id="@+id/button1"
+        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Task 2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_marginTop="35dp"
+        android:id="@+id/button2"
+        android:layout_below="@+id/button1"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Task 3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="47dp"
+        android:id="@+id/button3"
+        android:layout_below="@+id/button2"
+        android:layout_alignStart="@+id/button2"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
