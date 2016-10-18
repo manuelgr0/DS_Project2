@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(intent3);
-            }
+
+           }
         });
     }
 }
