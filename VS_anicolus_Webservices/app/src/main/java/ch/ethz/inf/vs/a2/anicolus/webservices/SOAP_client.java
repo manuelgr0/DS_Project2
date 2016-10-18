@@ -15,7 +15,7 @@ public class SOAP_client extends AppCompatActivity implements SensorListener {
 
     @Override
     public void onReceiveSensorValue(double value) {
-        
+
     }
 
     @Override
