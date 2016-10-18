@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ch.ethz.inf.vs.a2.anicolus.webservices">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,6 +23,7 @@
             android:label="REST Client" />
         <activity android:name=".SOAP_client" />
         <activity android:name=".REST_server"></activity>
+
     </application>
 
 </manifest>
