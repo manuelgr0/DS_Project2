@@ -32,16 +32,15 @@ public class RawHttpSensor extends AbstractSensor {
         //read response from server
         InputStream input_stream = socket.getInputStream();
 
+        return input_stream.toString();
 
-
-
-
-
-        return null;
     }
 
     @Override
     public double parseResponse(String response) {
-        return 0;
+        //parse string filter out temperature
+        int i = response.indexOf("getterValue");
+        String temp = response.substring(i+13, i+18);
+        return Double.valueOf(temp);
     }
 }
