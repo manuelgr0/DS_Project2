@@ -15,7 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".REST_client" />
+        <activity
+            android:name=".REST_client"
+            android:label="REST Client" />
         <activity android:name=".SOAP_client" />
         <activity android:name=".REST_server"></activity>
     </application>
