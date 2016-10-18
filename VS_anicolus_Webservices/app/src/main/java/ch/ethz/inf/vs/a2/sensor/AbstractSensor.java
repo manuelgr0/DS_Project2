@@ -28,6 +28,7 @@ public abstract class AbstractSensor implements Sensor {
 
     @Override
     public void getTemperature() {
+       System.out.println("getTemperature in");
         new AsyncWorker().execute();
     }
 
@@ -71,6 +72,7 @@ public abstract class AbstractSensor implements Sensor {
             } catch (Exception e) {
                 e.printStackTrace();
                 publishProgress(e.toString());
+                System.out.println("error");
                 return null;
             }
         }
@@ -84,6 +86,7 @@ public abstract class AbstractSensor implements Sensor {
         protected void onPostExecute(String result) {
             if (result != null)
                 sendValue(parseResponse(result));
+            System.out.println("onPostExecute in");
         }
     }
 }

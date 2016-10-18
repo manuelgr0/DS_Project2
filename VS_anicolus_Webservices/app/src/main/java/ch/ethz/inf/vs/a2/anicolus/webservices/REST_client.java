@@ -24,6 +24,9 @@ public class REST_client extends AppCompatActivity implements SensorListener{
         //adding to list of HttpSensor listeners
         http.registerListener(this);
 
+        //get temperature
+        http.getTemperature();
+
 
 
     }
@@ -32,7 +35,6 @@ public class REST_client extends AppCompatActivity implements SensorListener{
     public void onReceiveSensorValue(double value) {
 
         temperature.setText(String.valueOf(value));
-        Log.d("teeasfsdf","sdfsdfsdk");
 
     }
 
