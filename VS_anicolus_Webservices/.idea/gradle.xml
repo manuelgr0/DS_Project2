@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/ksoap2-android-assembly-3.6.2-jar" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
