@@ -14,7 +14,12 @@ import ch.ethz.inf.vs.a2.sensor.AbstractSensor;
 
 public class XmlSensor extends AbstractSensor {
     private final String targeturl = "http://vslab.inf.ethz.ch:8080/SunSPOTWebServices/SunSPOTWebservice";
-    private final String urlParameters = "";
+    private final String urlParameters = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+            "    <S:Header/>\n" +
+            "    <S:Body>\n" +
+            "        <ns2:getDiscoveredSpots xmlns:ns2=\"http://webservices.vslecture.vs.inf.ethz.ch/\"/>\n" +
+            "    </S:Body>\n" +
+            "</S:Envelope>";
 
     @Override
     public String executeRequest() throws Exception {
