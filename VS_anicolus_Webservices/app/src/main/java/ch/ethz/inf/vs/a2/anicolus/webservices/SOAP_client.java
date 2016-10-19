@@ -21,7 +21,7 @@ public class SOAP_client extends AppCompatActivity implements SensorListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soap_client);
 
-        text = (TextView)findViewById(R.id.temp1);
+        text = (TextView)findViewById(R.id.temp);
 
         //register this activity as listener for SOAP sensors
         xml.registerListener(this);
