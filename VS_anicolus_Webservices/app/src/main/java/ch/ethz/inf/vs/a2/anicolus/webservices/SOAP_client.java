@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ch.ethz.inf.vs.a2.sensor.SensorListener;
+import ch.ethz.inf.vs.a2.solution.sensor.SoapSensor;
 import ch.ethz.inf.vs.a2.solution.sensor.XmlSensor;
 
 import static java.security.AccessController.getContext;
@@ -37,6 +38,12 @@ public class SOAP_client extends AppCompatActivity implements SensorListener {
         });
 
         Button button2 = (Button)findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                SoapSensor sensor2 = new SoapSensor();
+                sensor2.getTemperature();
+            }
+        });
     }
 
     @Override
