@@ -21,7 +21,9 @@
         <activity
             android:name=".REST_client"
             android:label="REST Client" />
-        <activity android:name=".SOAP_client" />
+        <activity
+            android:name=".SOAP_client"
+            android:label="SOAP Client" />
         <activity android:name=".REST_server" />
 
         <service

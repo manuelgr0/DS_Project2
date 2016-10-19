@@ -7,6 +7,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -31,33 +32,36 @@ public class XmlSensor extends AbstractSensor {
     public String executeRequest() throws Exception {
         URL url;
         HttpURLConnection connection = null;
-        try {
-            //Create connection
-            url = new URL("http://vslab.inf.ethz.ch:8080/SunSPOTWebServices/SunSPOTWebservice");
-            connection = (HttpURLConnection) url.openConnection();
 
-            connection.setRequestMethod("POST");
-            connection.setDoOutput(true);
-            connection.setDoInput(true);
-            //connection.setRequestProperty("Content-type", "text/xml; charset=utf-8");
-            connection.setRequestProperty("Content-Type", "text/xml");
+        //Create connection
+        url = new URL("http://vslab.inf.ethz.ch:8080/SunSPOTWebServices/SunSPOTWebservice");
+        connection = (HttpURLConnection) url.openConnection();
 
-            //Send request
-            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-            wr.writeBytes(urlParameters);
-            wr.flush();
-            wr.close();
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
+        connection.setDoInput(true);
+        //connection.setRequestProperty("Content-type", "text/xml; charset=utf-8");
+        connection.setRequestProperty("Content-Type", "text/xml");
 
-            //Get Response
-            InputStream is;
-            Log.i("response", "code=" + connection.getResponseCode());
-            if (connection.getResponseCode() <= 400) {
-                is = connection.getInputStream();
-            } else {
+        //Send request
+        DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+        wr.writeBytes(urlParameters);
+        wr.flush();
+        wr.close();
+
+        //Get Response
+        InputStream is;
+        Log.i("response", "code=" + connection.getResponseCode());
+        if (connection.getResponseCode() <= 400) {
+            is = connection.getInputStream();
+        } else {
               /* error from server */
-                is = connection.getErrorStream();
-            }
-            // is= connection.getInputStream();
+            is = connection.getErrorStream();
+        }
+
+        String ret = convertStreamToString(is);
+
+            /* is= connection.getInputStream();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is));
             String line;
             StringBuffer response = new StringBuffer();
@@ -67,28 +71,27 @@ public class XmlSensor extends AbstractSensor {
             }
             rd.close();
             Log.i("response", "" + response.toString());
-            return response.toString();
-        } catch (Exception e) {
-            Log.e("error https", "", e);
-            return null;
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
+            return response.toString(); */
+
+        if (connection != null) {
+            connection.disconnect();
         }
+
+        return ret;
+
 
     }
 
     @Override
     public double parseResponse(String response) {
         Log.d("Parser is called : ", "starting parsing");
-        String text = null;
+        Double ret = -1.0;
         int event;
         try {
             XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
+            xmlFactoryObject.setNamespaceAware(true);
             XmlPullParser myparser = xmlFactoryObject.newPullParser();
 
-            myparser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
             myparser.setInput(new StringReader(response));
 
             Log.d("parsing response", response);
@@ -96,28 +99,44 @@ public class XmlSensor extends AbstractSensor {
             //Catch event
             event = myparser.getEventType();
             while (event != XmlPullParser.END_DOCUMENT) {
-                String name = myparser.getName();
-                switch (event) {
-                    case XmlPullParser.START_TAG:
-                        break;
-                    case XmlPullParser.TEXT:
-                        text = myparser.getText();
-                        Log.d("Parsin event....:  " , text);
-                        break;
-                    case XmlPullParser.END_TAG:
-                        if(name.equals("temperature")){
-                            Log.d("temperature is: ", text);
-                            return Double.valueOf(text);
-                        }
+                System.out.println("looping");
+                if (event == XmlPullParser.START_TAG && myparser.getName().equals("temperature")) {
+                    myparser.next();
+                    ret = Double.valueOf(myparser.getText());
+                    System.out.println("temperatre is " + ret);
+                    break;
                 }
-                Log.d("halllooooooooo", "öalsdjf");
+                event = myparser.next();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 0;
+        return ret;
     }
+
+    private String convertStreamToString(InputStream is) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+
+        String line = null;
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append('\n');
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return sb.toString();
+
+    }
+
 
 }
 
