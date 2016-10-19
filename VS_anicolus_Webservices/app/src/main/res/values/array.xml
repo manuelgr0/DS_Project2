@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="methods">
+               
+        <item>HTML</item>
+               
+        <item>Plain text</item>
+               
+        <item>JSON</item>
+             
+    </string-array>
+
+    <string name="methods" />
+</resources>
