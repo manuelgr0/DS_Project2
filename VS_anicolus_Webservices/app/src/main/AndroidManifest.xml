@@ -22,9 +22,12 @@
             android:name=".REST_client"
             android:label="REST Client" />
         <activity android:name=".SOAP_client" />
-        <activity android:name=".REST_server"></activity>
+        <activity android:name=".REST_server" />
 
+        <service
+            android:name=".Server"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
-
 
 </manifest>
