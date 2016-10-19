@@ -2,11 +2,15 @@ package ch.ethz.inf.vs.a2.solution.sensor;
 
 import android.util.Log;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -77,6 +81,41 @@ public class XmlSensor extends AbstractSensor {
 
     @Override
     public double parseResponse(String response) {
+        Log.d("Parser is called : ", "starting parsing");
+        String text = null;
+        int event;
+        try {
+            XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
+            XmlPullParser myparser = xmlFactoryObject.newPullParser();
+
+            myparser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            myparser.setInput(new StringReader(response));
+
+            Log.d("parsing response", response);
+
+            //Catch event
+            event = myparser.getEventType();
+            while (event != XmlPullParser.END_DOCUMENT) {
+                String name = myparser.getName();
+                switch (event) {
+                    case XmlPullParser.START_TAG:
+                        break;
+                    case XmlPullParser.TEXT:
+                        text = myparser.getText();
+                        Log.d("Parsin event....:  " , text);
+                        break;
+                    case XmlPullParser.END_TAG:
+                        if(name.equals("temperature")){
+                            Log.d("temperature is: ", text);
+                            return Double.valueOf(text);
+                        }
+                }
+                Log.d("halllooooooooo", "öalsdjf");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
