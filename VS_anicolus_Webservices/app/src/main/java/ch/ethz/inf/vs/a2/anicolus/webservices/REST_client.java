@@ -2,7 +2,6 @@ package ch.ethz.inf.vs.a2.anicolus.webservices;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -13,8 +12,6 @@ import ch.ethz.inf.vs.a2.sensor.SensorListener;
 import ch.ethz.inf.vs.a2.solution.sensor.JsonSensor;
 import ch.ethz.inf.vs.a2.solution.sensor.RawHttpSensor;
 import ch.ethz.inf.vs.a2.solution.sensor.TextSensor;
-
-import static android.R.attr.data;
 
 public class REST_client extends AppCompatActivity implements SensorListener {
 
@@ -32,7 +29,7 @@ public class REST_client extends AppCompatActivity implements SensorListener {
         setContentView(R.layout.activity_rest_client);
 
         //find textView, spinner & button on activity
-        temperature = (TextView) findViewById(R.id.temp);
+        temperature = (TextView) findViewById(R.id.temp1);
         spinner = (Spinner) findViewById(R.id.spinner);
         button = (Button) findViewById(R.id.button);
 

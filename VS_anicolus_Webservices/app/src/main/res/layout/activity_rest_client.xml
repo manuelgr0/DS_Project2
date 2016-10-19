@@ -23,7 +23,7 @@
         android:text="get temeperature"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/temp"
+        android:layout_below="@+id/temp1"
         android:layout_marginTop="68dp"
         android:id="@+id/button"
         android:layout_alignParentEnd="true" />
@@ -32,7 +32,7 @@
         android:text="temperature will show here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/temp"
+        android:id="@+id/temp1"
         android:layout_marginTop="67dp"
         android:layout_below="@+id/spinner"
         android:layout_centerHorizontal="true" />

@@ -11,8 +11,6 @@ import ch.ethz.inf.vs.a2.sensor.SensorListener;
 import ch.ethz.inf.vs.a2.solution.sensor.SoapSensor;
 import ch.ethz.inf.vs.a2.solution.sensor.XmlSensor;
 
-import static java.security.AccessController.getContext;
-
 public class SOAP_client extends AppCompatActivity implements SensorListener {
 
     TextView text;
@@ -23,7 +21,7 @@ public class SOAP_client extends AppCompatActivity implements SensorListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soap_client);
 
-        text = (TextView)findViewById(R.id.temp);
+        text = (TextView)findViewById(R.id.temp1);
 
         //register this activity as listener for SOAP sensors
         xml.registerListener(this);
@@ -40,8 +38,8 @@ public class SOAP_client extends AppCompatActivity implements SensorListener {
         Button button2 = (Button)findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                SoapSensor sensor2 = new SoapSensor();
-                sensor2.getTemperature();
+                xml.getTemperature();
+                Toast.makeText(getApplicationContext(), "Temperature updated using manual SOAP", Toast.LENGTH_SHORT).show();
             }
         });
     }
