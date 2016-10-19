@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="btnStart" type="id" />
+    <item name="btnStop" type="id" />
+    <item name="serviceState" type="id" />
+</resources>

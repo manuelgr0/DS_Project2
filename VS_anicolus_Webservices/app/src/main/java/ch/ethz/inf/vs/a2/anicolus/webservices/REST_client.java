@@ -74,7 +74,6 @@ public class REST_client extends AppCompatActivity implements SensorListener {
 
         }
 
-
     }
 
     @Override
