@@ -2,9 +2,9 @@ package ch.ethz.inf.vs.a2.solution.sensor;
 
 import ch.ethz.inf.vs.a2.sensor.AbstractSensor;
 
-/**
- * Created by manue on 18.10.2016.
- */
+
+/*TODO USE THE GUIDE : https://code.tutsplus.com/tutorials/consuming-web-services-with-ksoap--mobile-21242
+ *TODO in the guide he used VER11 instead of VER12 (just in case of a error) */
 
 public class SoapSensor extends AbstractSensor {
     @Override
