@@ -17,7 +17,9 @@ public class XmlSensor extends AbstractSensor {
     private final String urlParameters = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
             "    <S:Header/>\n" +
             "    <S:Body>\n" +
-            "        <ns2:getDiscoveredSpots xmlns:ns2=\"http://webservices.vslecture.vs.inf.ethz.ch/\"/>\n" +
+            "        <ns2:getSpot xmlns:ns2=\"http://webservices.vslecture.vs.inf.ethz.ch/\">\n" +
+            "            <id>Spot3</id>\n" +
+            "        </ns2:getSpot>\n" +
             "    </S:Body>\n" +
             "</S:Envelope>";
 
