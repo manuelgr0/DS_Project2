@@ -94,7 +94,6 @@ public class XmlSensor extends AbstractSensor {
 
             myparser.setInput(new StringReader(response));
 
-            Log.d("parsing response", response);
 
             //Catch event
             event = myparser.getEventType();
