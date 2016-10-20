@@ -87,7 +87,6 @@ public class XmlSensor extends AbstractSensor {
             //Catch event
             event = myparser.getEventType();
             while (event != XmlPullParser.END_DOCUMENT) {
-                System.out.println("looping");
                 if (event == XmlPullParser.START_TAG && myparser.getName().equals("temperature")) {
                     myparser.next();
                     ret = Double.valueOf(myparser.getText());

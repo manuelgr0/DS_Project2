@@ -33,8 +33,6 @@ public class SoapSensor extends AbstractSensor {
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.setOutputSoapObject(request);
 
-        Log.d("request:     ", request.toString());
-
         //Creating the request
         HttpTransportSE ht = new HttpTransportSE(MAIN_REQUEST_URL);
         ht.debug = true;
@@ -42,13 +40,10 @@ public class SoapSensor extends AbstractSensor {
             //Sending the request
             ht.call(SOAP_ACTION, envelope);
 
-            Log.d("hallo", "-------------");
-
             //Processing the response
             SoapObject response = (SoapObject) envelope.getResponse();
 
-            Log.d("This is the response:  ", response.toString());
-            return response.toString();
+            return response.getProperty("temperature").toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,35 +52,8 @@ public class SoapSensor extends AbstractSensor {
 
     @Override
     public double parseResponse(String response) {
-        Double ret = -1.0;
-        int event;
-        try {
-            XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
-            xmlFactoryObject.setNamespaceAware(true);
-            XmlPullParser myparser = xmlFactoryObject.newPullParser();
-
-            myparser.setInput(new StringReader(response));
-
-            Log.d("parsing response", response);
-
-            //Catch event
-            event = myparser.getEventType();
-            while (event != XmlPullParser.END_DOCUMENT) {
-                System.out.println("looping");
-                if (event == XmlPullParser.START_TAG && myparser.getName().equals("temperature")) {
-                    myparser.next();
-                    ret = Double.valueOf(myparser.getText());
-                    System.out.println("temperatre is " + ret);
-                    break;
-                }
-                event = myparser.next();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return ret;
+        System.out.println("temperatre is " + response);
+        return Double.valueOf(response);
     }
 
 
