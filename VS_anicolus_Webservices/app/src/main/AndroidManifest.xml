@@ -31,5 +31,6 @@
             android:enabled="true"
             android:exported="true"></service>
     </application>
+    <uses-permission android:name="android.permission.BODY_SENSORS"></uses-permission>
 
 </manifest>
