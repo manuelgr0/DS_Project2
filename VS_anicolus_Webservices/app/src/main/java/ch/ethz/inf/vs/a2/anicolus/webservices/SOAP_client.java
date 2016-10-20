@@ -15,7 +15,6 @@ public class SOAP_client extends AppCompatActivity implements SensorListener {
 
     TextView text;
     XmlSensor xml = new XmlSensor();
-    SoapSensor soap = new SoapSensor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +25,6 @@ public class SOAP_client extends AppCompatActivity implements SensorListener {
 
         //register this activity as listener for SOAP sensors
         xml.registerListener(this);
-        soap.registerListener(this);
 
 
         Button button1 = (Button)findViewById(R.id.button1);
@@ -40,8 +38,8 @@ public class SOAP_client extends AppCompatActivity implements SensorListener {
         Button button2 = (Button)findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                soap.getTemperature();
-                Toast.makeText(getApplicationContext(), "Temperature updated using SOAP library", Toast.LENGTH_SHORT).show();
+                xml.getTemperature();
+                Toast.makeText(getApplicationContext(), "Temperature updated using manual SOAP", Toast.LENGTH_SHORT).show();
             }
         });
     }
