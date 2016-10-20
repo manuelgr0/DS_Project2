@@ -14,8 +14,8 @@ import java.util.Enumeration;
 
 public class REST_server extends AppCompatActivity {
 
-    private Enumeration<NetworkInterface> enumeration;
-    private NetworkInterface ni;
+    /*private Enumeration<NetworkInterface> enumeration;
+    private NetworkInterface ni;*/
     private String interfaceType = "eth0";
     private boolean serviceRunning;
     private Intent server;
@@ -26,7 +26,7 @@ public class REST_server extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rest_server);
 
-        try {
+        /*try {
             enumeration = NetworkInterface.getNetworkInterfaces();
         } catch (SocketException e) {
             e.printStackTrace();
@@ -38,11 +38,12 @@ public class REST_server extends AppCompatActivity {
                 break;
         }
 
-        Log.d("Interface chosen", ni.getName());
+        Log.d("Interface chosen", ni.getName());*/
 
         text = (TextView) findViewById(R.id.serviceState);
         text.setText("Service Inactive.");
         server = new Intent(this, Server.class);
+        server.putExtra("interface", interfaceType);
 
         Button btnStart = (Button) findViewById(R.id.btnStart);
         btnStart.setText("Start Service");
