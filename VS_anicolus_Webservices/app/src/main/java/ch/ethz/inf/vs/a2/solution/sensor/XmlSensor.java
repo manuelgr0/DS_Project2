@@ -61,17 +61,6 @@ public class XmlSensor extends AbstractSensor {
 
         String ret = convertStreamToString(is);
 
-            /* is= connection.getInputStream();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-            String line;
-            StringBuffer response = new StringBuffer();
-            while ((line = rd.readLine()) != null) {
-                response.append(line);
-                response.append('\r');
-            }
-            rd.close();
-            Log.i("response", "" + response.toString());
-            return response.toString(); */
 
         if (connection != null) {
             connection.disconnect();
