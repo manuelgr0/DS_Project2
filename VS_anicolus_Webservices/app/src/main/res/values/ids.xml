@@ -3,4 +3,5 @@
     <item name="btnStart" type="id" />
     <item name="btnStop" type="id" />
     <item name="serviceState" type="id" />
+    <item name="address" type="id" />
 </resources>

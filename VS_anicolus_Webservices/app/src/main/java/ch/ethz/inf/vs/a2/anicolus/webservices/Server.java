@@ -8,6 +8,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.net.Inet4Address;
@@ -82,6 +83,9 @@ public class Server extends Service implements SensorEventListener {
             if (temp.getAddress().length == 4)
                 inet = temp;
         }
+
+        byte[] addr = inet.getAddress();
+        REST_server.address.setText(addr[0] + "." + addr[1] + "." + addr[2] + "." + addr[3] + ":" + port);
 
         try {
             serverSocket = new ServerSocket(port, 50, inet);
