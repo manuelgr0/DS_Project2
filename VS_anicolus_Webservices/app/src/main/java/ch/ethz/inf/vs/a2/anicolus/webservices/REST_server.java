@@ -1,6 +1,7 @@
 package ch.ethz.inf.vs.a2.anicolus.webservices;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
@@ -24,11 +25,12 @@ public class REST_server extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rest_server);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
         address = (TextView) findViewById(R.id.address);
 
         vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        mp = MediaPlayer.create(this, R.raw.sound);
+        mp = MediaPlayer.create(this, R.raw.imperial_march);
         mp.setVolume(1.0f, 1.0f);
 
         text = (TextView) findViewById(R.id.serviceState);
@@ -57,6 +59,7 @@ public class REST_server extends AppCompatActivity {
                 if (serviceRunning) {
                     serviceRunning = false;
                     text.setText("Service Stopped.");
+                    address.setText("");
                     stopService(server);
                 }
             }

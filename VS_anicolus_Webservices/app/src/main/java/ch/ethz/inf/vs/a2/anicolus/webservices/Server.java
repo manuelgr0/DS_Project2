@@ -84,8 +84,7 @@ public class Server extends Service implements SensorEventListener {
                 inet = temp;
         }
 
-        byte[] addr = inet.getAddress();
-        REST_server.address.setText(addr[0] + "." + addr[1] + "." + addr[2] + "." + addr[3] + ":" + port);
+        REST_server.address.setText("Please enter " + inet.getHostAddress() + ":" + port + " in browser.");
 
         try {
             serverSocket = new ServerSocket(port, 50, inet);

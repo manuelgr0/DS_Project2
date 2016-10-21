@@ -54,24 +54,24 @@ public class SocketInterface {
         }
         else if (site.equals("2 ")) {
             String str = "HTTP/1.1 200 OK\n\n<html><body><a href=\"/\">root</a><h1>Vibrator</h1>" +
-                    "<a href=\"/21\">vibrate for 2 secs</a></br>" +
-                    "<a href=\"/22\">vibrate for 5 secs</a></br>" +
+                    "<a href=\"/21\">click to vibrate for 2 secs</a></br>" +
+                    "<a href=\"/22\">click to vibrate for 5 secs</a></br>" +
                     "</body></html>\n";
             sendResponse(socket, str);
         }
         else if (site.equals("21")) {
             REST_server.vib.vibrate(2000);
             String str = "HTTP/1.1 200 OK\n\n<html><body><a href=\"/\">root</a><h1>Vibrator</h1>Vibrating for 2 secs.</br>" +
-                    "<a href=\"/21\">vibrate for 2 secs</a></br>" +
-                    "<a href=\"/22\">vibrate for 5 secs</a></br>" +
+                    "<a href=\"/21\">click to vibrate for 2 secs</a></br>" +
+                    "<a href=\"/22\">click to vibrate for 5 secs</a></br>" +
                     "</body></html>\n";
             sendResponse(socket, str);
         }
         else if (site.equals("22")) {
             REST_server.vib.vibrate(5000);
             String str = "HTTP/1.1 200 OK\n\n<html><body><a href=\"/\">root</a><h1>Vibrator</h1>Vibrating for 5 secs.</br>" +
-                    "<a href=\"/21\">vibrate for 2 secs</a></br>" +
-                    "<a href=\"/22\">vibrate for 5 secs</a></br>" +
+                    "<a href=\"/21\">click to vibrate for 2 secs</a></br>" +
+                    "<a href=\"/22\">click to vibrate for 5 secs</a></br>" +
                     "</body></html>\n";
             sendResponse(socket, str);
         }
