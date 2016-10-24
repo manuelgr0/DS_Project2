@@ -1,3 +1,20 @@
+1.
+a) The Request-Line begins with a method token, followed by the
+   Request-URI and the protocol version, and ending with CRLF. The
+   elements are separated by SP characters. No CR or LF is allowed
+   except in the final CRLF sequence.
+   Request-Line = Method SP Request-URI SP HTTP-Version CRLF
+
+b) GET HTTP/1.1
+   Host: 192.168.1.1:8080
+c) Accept: Content-Types that are acceptable for the response
+   Accept-Encoding: List of acceptable human languages for response
+   
+   
+
+
+   
+
 4.
 a)	http://vslab.inf.ethz.ch:8080/SunSPOTWebServices/SunSPOTWebservice?wsdl
 	It can be retrieved over the link?
