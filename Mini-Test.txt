@@ -21,10 +21,11 @@ b) Blocking" means that the caller waits until the callee finishes its processin
    don't.
    OutputStream, however, does never block.
    
-   
-
-
-   
+3.
+a)	True
+b)	False
+c)	---------------------------------------CLAUDE
+d)	---------------------------------------CLAUDE   
 
 4.
 a)	http://vslab.inf.ethz.ch:8080/SunSPOTWebServices/SunSPOTWebservice?wsdl
