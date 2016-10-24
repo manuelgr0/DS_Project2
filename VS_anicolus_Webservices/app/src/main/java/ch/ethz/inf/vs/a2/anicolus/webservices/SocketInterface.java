@@ -1,7 +1,5 @@
 package ch.ethz.inf.vs.a2.anicolus.webservices;
 
-import android.os.Vibrator;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.io.IOException;
@@ -13,6 +11,7 @@ import java.net.Socket;
 
 public class SocketInterface {
 
+    // HTML shown on the root page.
     private String index =
             "<html>" +
                "<body>" +
@@ -33,8 +32,13 @@ public class SocketInterface {
         socket.getInputStream().read(b); // read raw data from input stream
         String stream = new String(b, "UTF-8"); // convert raw data into readable format
         Log.d("input stream", stream);
+        if (stream.length() < 7) { // request is to short and might get an OOB exception when calling substring
+            socket.close();
+            return;
+        }
         String site = stream.substring(5,7);
-        if (!stream.substring(0,3).equals("GET")) // wrong format
+        // Lightweight parsing begins here
+        if (!stream.substring(0,3).equals("GET")) // wrong format, we only consider GET requests
             sendResponse(socket, "HTTP/1.1 404 Not Found\n\n<html><head><title>404 Not Found</title></head><body><h1>Not Found</h1></body></html>\n");
         else if (site.equals(" H")) { // root site
             String str = "HTTP/1.1 200 OK\n\n" + index + "\n";
@@ -88,11 +92,12 @@ public class SocketInterface {
                     "</body></html>\n";
             sendResponse(socket, str);
         }
-        else {
+        else { // requested site is not in scope
             sendResponse(socket, "HTTP/1.1 404 Not Found\n\n<html><head><title>404 Not Found</title></head><body><h1>Not Found</h1></body></html>\n");
         }
     }
 
+    // Send response and immediately close socket -> Connectionless communication.
     public void sendResponse(Socket socket, String msg) throws IOException {
         socket.getOutputStream().write(msg.getBytes("UTF-8"));
         socket.close();

@@ -4,6 +4,10 @@ a) The Request-Line begins with a method token, followed by the
    elements are separated by SP characters. No CR or LF is allowed
    except in the final CRLF sequence.
    Request-Line = Method SP Request-URI SP HTTP-Version CRLF
+5.
+a)
+10.0.2.15
+It is the device’s within each instance of an emulator. The emulator does its own address translation to the emulated device. However, by connecting to 10.0.2.15 on your development machine you cannot connect to any emulated device.
 
 b) GET HTTP/1.1
    Host: 192.168.1.1:8080
@@ -59,7 +63,17 @@ b)	http://vslab.inf.ethz.ch:8080/SunSPOTWebServices/SunSPOTWebservice?wsdl
 
 c)
 
+b)
+emulated device’s loopback interface, so a call to the emulated device itself
 
-5. 
+c)
+10.0.2.2
 
-a) 	
+d)
+by using the telnet interface of the android emulator.
+A redirection from the development machine’s port to the emulated device’s port has to be added.
+We did it like this:
+telnet localhost 5554 // 5554 is the port on which the emulator listens
+auth <auth_token> // authentication required
+redir add tcp:8088:8088 // so all connections on dev machine’s port 8088 are redirected to the emulated device’s port 8088 (in our case it was 8088)
+Via localhost:8088 the dev machine can then connect to the emulated device.

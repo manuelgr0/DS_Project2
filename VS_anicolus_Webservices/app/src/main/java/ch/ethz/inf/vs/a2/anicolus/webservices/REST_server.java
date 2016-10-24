@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class REST_server extends AppCompatActivity {
 
-    private String interfaceType = "eth0";
+    private String interfaceType = "wlan0"; // set to eth0 in case app is running on emulator, otherwise wlan0
     private boolean serviceRunning;
     private Intent server;
     private TextView text;
@@ -27,17 +27,23 @@ public class REST_server extends AppCompatActivity {
         setContentView(R.layout.activity_rest_server);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
-        address = (TextView) findViewById(R.id.address);
-
+        // Instantiate actuators.
         vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        mp = MediaPlayer.create(this, R.raw.imperial_march);
+        mp = MediaPlayer.create(this, R.raw.barbie_girl);
         mp.setVolume(1.0f, 1.0f);
 
+        // Show state of service
         text = (TextView) findViewById(R.id.serviceState);
         text.setText("Service Inactive.");
+
+        // TextView for showing the address on which the webservice can be accessed.
+        address = (TextView) findViewById(R.id.address);
+
+        // Instantiate service and tell it which network interface to use.
         server = new Intent(this, Server.class);
         server.putExtra("interface", interfaceType);
 
+        // Button to start the service
         Button btnStart = (Button) findViewById(R.id.btnStart);
         btnStart.setText("Start Service");
         btnStart.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +57,7 @@ public class REST_server extends AppCompatActivity {
             }
         });
 
+        // Button to stop the service
         Button btnStop = (Button) findViewById(R.id.btnStop);
         btnStop.setText("Stop Service");
         btnStop.setOnClickListener(new View.OnClickListener() {

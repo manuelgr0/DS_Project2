@@ -8,21 +8,16 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.TextView;
 
 import java.io.IOException;
-import java.net.Inet4Address;
-import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -37,8 +32,8 @@ public class Server extends Service implements SensorEventListener {
     private int port = 8088;
     private InetAddress inet;
     private boolean closed = true;
-    private BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<Runnable>(2);
-    private ThreadPoolExecutor tpe = new ThreadPoolExecutor(4, 4, 10, TimeUnit.SECONDS, workQueue);
+    private BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<Runnable>(100);
+    private ThreadPoolExecutor tpe = new ThreadPoolExecutor(Integer.MAX_VALUE, Integer.MAX_VALUE, 0, TimeUnit.MILLISECONDS, workQueue);
     public static volatile float[] sensorVals = new float[2];
     private SensorManager sMgr;
     private Sensor light;
@@ -46,8 +41,7 @@ public class Server extends Service implements SensorEventListener {
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        //throw new UnsupportedOperationException("Not yet implemented");
+        // Do nothing here
         return null;
     }
 
@@ -55,13 +49,16 @@ public class Server extends Service implements SensorEventListener {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("service", "started");
 
+        // Get the required sensors.
         sMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
         light = sMgr.getDefaultSensor(Sensor.TYPE_LIGHT);
         pressure = sMgr.getDefaultSensor(Sensor.TYPE_PRESSURE);
 
+        // Register listeners for particular sensor events.
         sMgr.registerListener(this, light, SensorManager.SENSOR_DELAY_NORMAL);
         sMgr.registerListener(this, pressure, SensorManager.SENSOR_DELAY_NORMAL);
 
+        // check which network interface to use
         interfaceType = (String) intent.getExtras().get("interface");
 
         try {
@@ -70,6 +67,7 @@ public class Server extends Service implements SensorEventListener {
             e.printStackTrace();
         }
 
+        // scan for desired network interface
         while (enumeration.hasMoreElements()) {
             ni = enumeration.nextElement();
             if (ni.getName().equals(interfaceType))
@@ -80,14 +78,15 @@ public class Server extends Service implements SensorEventListener {
         while (en.hasMoreElements()) {
             InetAddress temp = en.nextElement();
             Log.d("address", temp.toString());
-            if (temp.getAddress().length == 4)
+            if (temp.getAddress().length == 4) // be sure to get the IPv4 address of the desired network interface
                 inet = temp;
         }
 
+        // show address to connect to on screen
         REST_server.address.setText("Please enter " + inet.getHostAddress() + ":" + port + " in browser.");
 
         try {
-            serverSocket = new ServerSocket(port, 50, inet);
+            serverSocket = new ServerSocket(port, 50, inet); // Instantiate a new server socket
             closed = false;
             Log.d("server", String.valueOf(serverSocket.getLocalSocketAddress()));
                 Thread t = new Thread(new Runnable() { // create thread handling network logistics
@@ -97,7 +96,7 @@ public class Server extends Service implements SensorEventListener {
                         try {
                             while (!closed) {
                                 final Socket socket = serverSocket.accept(); // wait for connection establishment (blocking)
-                                tpe.execute(new Runnable() { // each client handled separately in an individual thread
+                                Runnable r = new Runnable() { // each client (in particular request) handled separately in an individual thread
                                     @Override
                                     public void run() {
                                         SocketInterface si = new SocketInterface();
@@ -107,7 +106,8 @@ public class Server extends Service implements SensorEventListener {
                                             e.printStackTrace();
                                         }
                                     }
-                                });
+                                };
+                                tpe.execute(r); // pass the thread handling the request to our executor service
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -115,7 +115,7 @@ public class Server extends Service implements SensorEventListener {
                         Log.d("finished", "accept");
                     }
                 });
-                t.start();
+                t.start(); // start thread handling network logistics
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -137,6 +137,8 @@ public class Server extends Service implements SensorEventListener {
         }
     }
 
+    // Handling sensor events
+    // Write them to a volatile field in order to avoid data races
     @Override
     public void onSensorChanged(SensorEvent event) {
         int type = event.sensor.getType();
