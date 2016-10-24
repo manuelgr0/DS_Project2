@@ -9,6 +9,17 @@ b) GET HTTP/1.1
    Host: 192.168.1.1:8080
 c) Accept: Content-Types that are acceptable for the response
    Accept-Encoding: List of acceptable human languages for response
+
+2.
+a) Socket class, ?? class
+b) Blocking" means that the caller waits until the callee finishes its processing.
+   For instance, a "blocking read" from a socket waits until there is data to return;
+   a "non-blocking" read does not, it just returns an indication (usually a count) of
+   whether there was something read.
+   In the case of InputStream the .read() feature call blocks while it waits for data,
+   all the others (for example available())
+   don't.
+   OutputStream, however, does never block.
    
    
 
