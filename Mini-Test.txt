@@ -4,11 +4,6 @@ a) The Request-Line begins with a method token, followed by the
    elements are separated by SP characters. No CR or LF is allowed
    except in the final CRLF sequence.
    Request-Line = Method SP Request-URI SP HTTP-Version CRLF
-5.
-a)
-10.0.2.15
-It is the device’s within each instance of an emulator. The emulator does its own address translation to the emulated device. However, by connecting to 10.0.2.15 on your development machine you cannot connect to any emulated device.
-
 b) GET HTTP/1.1
    Host: 192.168.1.1:8080
 c) Accept: Content-Types that are acceptable for the response
@@ -62,6 +57,11 @@ b)	http://vslab.inf.ethz.ch:8080/SunSPOTWebServices/SunSPOTWebservice?wsdl
 </operation>
 
 c)
+
+5.
+a)
+10.0.2.15
+It is the device’s within each instance of an emulator. The emulator does its own address translation to the emulated device. However, by connecting to 10.0.2.15 on your development machine you cannot connect to any emulated device.
 
 b)
 emulated device’s loopback interface, so a call to the emulated device itself
