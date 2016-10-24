@@ -21,11 +21,7 @@ b) Blocking" means that the caller waits until the callee finishes its processin
    don't.
    OutputStream, however, does never block.
    
-3.
-a)	True
-b)	False
-c)	---------------------------------------CLAUDE
-d)	---------------------------------------CLAUDE   
+3. 
 a) wrong, REST is an architectural style and approach to web communication
    rather than a protocol. It is, however, an alternative to SOAP.
 b) wrong, stateless means the opposite. No context from previous requests is
@@ -37,4 +33,28 @@ d) correct
 a)	http://vslab.inf.ethz.ch:8080/SunSPOTWebServices/SunSPOTWebservice?wsdl
 	It can be retrieved over the link?
 b)	http://vslab.inf.ethz.ch:8080/SunSPOTWebServices/SunSPOTWebservice?wsdl
+
+	<operation name="getSpot">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="SunSpotsWSException">
+<soap:fault name="SunSpotsWSException" use="literal"/>
+</fault>
+</operation>
+
+<operation name="getDiscoveredSpots">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+
 c)	
