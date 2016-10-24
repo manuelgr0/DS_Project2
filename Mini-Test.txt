@@ -26,7 +26,7 @@ a) wrong, REST is an architectural style and approach to web communication
    rather than a protocol. It is, however, an alternative to SOAP.
 b) wrong, stateless means the opposite. No context from previous requests is
    used to process a new request.
-c) wrong, POST corresponds to UPDATE and PUT to CREATE
+c) correct
 d) correct
 
 4.
