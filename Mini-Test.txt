@@ -57,4 +57,9 @@ b)	http://vslab.inf.ethz.ch:8080/SunSPOTWebServices/SunSPOTWebservice?wsdl
 </output>
 </operation>
 
-c)	
+c)
+
+
+5. 
+
+a) 	
