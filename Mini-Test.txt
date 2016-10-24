@@ -1,0 +1,5 @@
+4.
+a)	http://vslab.inf.ethz.ch:8080/SunSPOTWebServices/SunSPOTWebservice?wsdl
+	It can be retrieved over the link?
+b)	http://vslab.inf.ethz.ch:8080/SunSPOTWebServices/SunSPOTWebservice?wsdl
+c)	
